@@ -47,6 +47,8 @@ end
 
 group :test do
   gem 'rspec'
+   gem "capybara"
+  gem "selenium-webdriver"
 end
 
 group :development do
@@ -57,6 +59,8 @@ group :development do
   gem 'rubocop'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+   gem "database_cleaner"
+  gem "rspec-rails"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
