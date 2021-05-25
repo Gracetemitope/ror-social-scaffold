@@ -1,0 +1,23 @@
+<li class="friendship-li">
+  <div class="friendship-name">
+  <% @friendships.each do |friendship|%>
+
+    <strong>From: </strong><%= @friendship.inviter.name %>
+  </div>
+  <div>
+    <%= form_with model: friendship, method: "PATCH" do |form| %>
+      <%= form.hidden_field :invitee_id %>
+      <%= form.hidden_field :inviter_id %>
+      <%= form.hidden_field :confirmed, value: true %>
+      <%= form.submit 'Accept Friendship' %>
+    <% end %>
+    <%= form_with model: friendship, method: "DELETE" do |form| %>
+      <%= form.hidden_field :invitee_id %>
+      <%= form.hidden_field :inviter_id %>
+      <%= form.hidden_field :confirmed %>
+      <%= form.submit 'Reject Friendship' %>
+    <% end %>
+    <% end %>
+  </div>
+</li>
+

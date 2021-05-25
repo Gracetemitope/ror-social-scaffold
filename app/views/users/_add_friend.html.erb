@@ -1,0 +1,14 @@
+<% if !add_friend_button(current_user, @user.id) %>
+  <%= form_with model: friendship do |form| %>
+    <%= form.hidden_field :invitee_id, value: @user.id %>
+    <%= form.hidden_field :inviter_id, value: current_user %>
+    <%= form.hidden_field :confirmed %>
+    <%= form.submit 'Invite to friendship' %>
+  <% end %>
+<% elsif current_user.comfirmed_friendships.exists?(invitee_id: @user) %>
+  <p>You are friends with this user</p>
+<% elsif current_user.inverse_friendships.exists?(inviter_id: @user) %>
+  <p>Friend Request</p>
+<% elsif @user != current_user %>
+  <p>Pending invitation</p>
+<% end %>
