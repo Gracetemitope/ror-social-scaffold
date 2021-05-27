@@ -30,7 +30,7 @@ module UsersHelper
                        method: :patch
       button_to 'Reject', delete_friendship_path(current_user[:id], pending_request[:id]),
                 params: { friendship: { id: pending_request[:id] } }, confirmed: 'rejected',
-                method: :patch
+                method: :delete
     end
   end
   # rubocop:enable Style/GuardClause
