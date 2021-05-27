@@ -1,20 +1,37 @@
 module UsersHelper
-  def display_errors(user)
-    return unless user.errors.full_messages.any?
+  # rubocop:disable Style/GuardClause
 
-    content_tag :p, "User could not be created. #{user.errors.full_messages.join('. ')}", class: 'errors'
+  def friend_button(current_user, user)
+    'You are friends' if Friendship.friend?(current_user, user)
   end
 
-  def add_friend_button(inviter_id, invitee_id)
-    if inviter_id == invitee_id || Friendship.exists?(inviter_id: inviter_id, invitee_id: invitee_id) ||
-       Friendship.exists?(inviter_id: invitee_id, invitee_id: inviter_id)
-      true
+  def friend_post(current_user, user)
+    if Friendship.friend?(current_user, user)
+      render @posts
     else
-      false
+      render @other_posts
     end
   end
 
-  def user(user)
-    @user = user
+  def friendship_button(current_user, user)
+    friendship = Friendship.both_sided_friendship(current_user, user)
+    pending_request = Friendship.request_sent(current_user, user)
+    if (friendship.nil? or friendship[:confirmed] == 'rejected') and current_user != user and !pending_request
+      button_to 'Invite to friendship', user_friendships_path(user[:id]),
+                params: { friendship: { invitee_id: user.id } }
+    end
   end
+
+  def friendship_update_button(current_user, user)
+    pending_request = Friendship.request_sent(current_user, user)
+    if current_user != user and pending_request
+      concat button_to 'Accept', update_friendship_path(current_user[:id], pending_request[:id]),
+                       params: { friendship: { id: pending_request[:id] } },
+                       method: :patch
+      button_to 'Reject', delete_friendship_path(current_user[:id], pending_request[:id]),
+                params: { friendship: { id: pending_request[:id] } }, confirmed: 'rejected',
+                method: :patch
+    end
+  end
+  # rubocop:enable Style/GuardClause
 end

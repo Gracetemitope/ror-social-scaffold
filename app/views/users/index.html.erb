@@ -1,20 +1,5 @@
 <section class="users-section">
   <ul class="users-list">
-    <%# <%= render @users %>
+    <%= render @users %>
   </ul>
-  <%# <% if current_user.check_friendship(@users)%>
-  <% User.all.each do |user|%>
-  <ul>
-  <%= user.name%>
-
-      <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
-        <%= render 'add_friend', friendship: @friendship %>
-
-
-
-<% end %>
-  </ul>
-
-
-<%# <% end %>
 </section>

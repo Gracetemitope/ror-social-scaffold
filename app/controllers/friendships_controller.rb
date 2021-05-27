@@ -1,50 +1,65 @@
 class FriendshipsController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-    @friendships = current_user.friend_requests
-  end
-
   def create
-    @friendship = Friendship.new(friendship_params) unless check_invitation(current_user,
-                                                                            params[:friendship][:invitee_id])
-    invitee_path = "/users/#{params[:friendship][:invitee_id]}"
+    if @friendship.nil?
 
-    if @friendship.save
-      flash[:notice] = 'Friend request was sent.'
+      @friend_request = Friendship.new(inviter_id: current_user.id, invitee_id: friendship_params[:invitee_id])
+
+      if @friend_request.save
+
+        flash[:notice] = 'Friend request successfully sent'
+
+      else
+
+        flash[:alert] = 'Failed to send a friend request, try again'
+
+      end
 
     else
-      flash[:alert] = 'Friend request cannot be sent.'
+
+      flash[:alert] = 'You can not send the request twice, wait for confirmation from the other user'
+
     end
-    redirect_to invitee_path
+
+    redirect_to users_path
   end
 
   def update
-    @friendship = Friendship.find(params[:id])
+    @friend_request = Friendship.find_by(id: friendship_update_params[:id])
+    @friend_request[:confirmed] = 'pending'
+    @friend_request[:confirmed] = 'accepted'
 
-    if @friendship.confirm_friend
-      flash[:notice] = 'You have succesfully accepted this request.'
-      redirect_to friendships_path
+    if @friend_request.save
+      flash[:notice] = 'Friend request updated'
+      redirect_to users_path
     else
-      render friendships_path, status: :unprocessable_entity
+      flash[:alert] = 'Failed to accept friend'
     end
   end
 
   def destroy
-    friendship = Friendship.find_by(friendship_params)
-    if friendship
-      friendship.destroy
-      flash[:notice] = 'Friend request was rejected'
-
+    @friend_request = Friendship.find_by(id: friendship_update_params[:id])
+    if @friend_request[:status] == 'pending'
+      @friend_request[:status] = 'rejected'
+      if @friend_request.save
+        flash[:notice] = 'Friend request updated'
+        redirect_to users_path
+      else
+        flash[:alert] = 'Failed to reject friend'
+      end
     else
-      flash[:alert] = 'Please try again.'
+      flash[:alert] = 'Something went wrong'
     end
-    redirect_to friendships_path
   end
-
-  private
 
   def friendship_params
-    params.require(:friendship).permit(:inviter_id, :invitee_id, :confirmed)
+    params.require(:friendship).permit(:invitee_id)
   end
+
+  def friendship_update_params
+    params.require(:friendship).permit(:id)
+  end
+
+  private :friendship_params, :friendship_update_params
 end
