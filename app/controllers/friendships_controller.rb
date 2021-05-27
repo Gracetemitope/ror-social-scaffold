@@ -31,7 +31,7 @@ class FriendshipsController < ApplicationController
     @friend_request[:confirmed] = 'accepted'
 
     if @friend_request.save
-      flash[:notice] = 'Friend request updated'
+      flash[:notice] = 'Friend request accepted'
       redirect_to users_path
     else
       flash[:alert] = 'Failed to accept friend'
@@ -40,16 +40,11 @@ class FriendshipsController < ApplicationController
 
   def destroy
     @friend_request = Friendship.find_by(id: friendship_update_params[:id])
-    if @friend_request[:status] == 'pending'
-      @friend_request[:status] = 'rejected'
-      if @friend_request.save
-        flash[:notice] = 'Friend request updated'
-        redirect_to users_path
-      else
-        flash[:alert] = 'Failed to reject friend'
-      end
+    if @friend_request.save
+      flash[:notice] = 'Friend request updated'
+      redirect_to users_path
     else
-      flash[:alert] = 'Something went wrong'
+      flash[:alert] = 'Failed to reject friend'
     end
   end
 
