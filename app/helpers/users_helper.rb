@@ -29,7 +29,7 @@ module UsersHelper
                        params: { friendship: { id: pending_request[:id] } },
                        method: :patch
       button_to 'Reject', delete_friendship_path(current_user[:id], pending_request[:id]),
-                params: { friendship: { id: pending_request[:id] } }, confirmed: 'rejected',
+                params: { friendship: { id: pending_request[:id] } },
                 method: :delete
     end
   end
