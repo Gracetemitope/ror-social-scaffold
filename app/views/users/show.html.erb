@@ -1,5 +1,10 @@
 <section class="user-section">
   <h2><%= "Name: #{@user.name}" %></h2>
+  <span>
+    <%= friendship_button(current_user, @user) %>
+    <%= friendship_update_button(current_user, @user) %>
+    <%= friend_button(current_user, @user) %>
+  </span>
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">

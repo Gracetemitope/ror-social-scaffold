@@ -1,0 +1,18 @@
+example_id                                     | status  | run_time        |
+---------------------------------------------- | ------- | --------------- |
+./spec/helpers/friendships_helper_spec.rb[1:1] | pending | 0.00002 seconds |
+./spec/requests/friendships_spec.rb[1:1:1]     | passed  | 0.02733 seconds |
+./spec/requests/friendships_spec.rb[1:1:2]     | passed  | 0.07785 seconds |
+./spec/requests/friendships_spec.rb[1:2:1]     | passed  | 0.03372 seconds |
+./spec/requests/friendships_spec.rb[1:2:2]     | passed  | 0.07834 seconds |
+./spec/routes/friendship_router_spec.rb[1:1:1] | passed  | 0.0037 seconds  |
+./spec/routes/friendship_router_spec.rb[1:1:2] | passed  | 0.00415 seconds |
+./spec/routes/friendship_router_spec.rb[1:1:3] | passed  | 0.05259 seconds |
+./spec/routes/friendship_router_spec.rb[1:1:4] | passed  | 0.00403 seconds |
+./spec/user_spec.rb[1:1:1]                     | passed  | 0.01514 seconds |
+./spec/user_spec.rb[1:1:2]                     | passed  | 0.01636 seconds |
+./spec/user_spec.rb[1:2:1]                     | passed  | 0.01581 seconds |
+./spec/user_spec.rb[1:2:2]                     | passed  | 0.01214 seconds |
+./spec/user_spec.rb[1:3:1]                     | passed  | 0.02558 seconds |
+./spec/user_spec.rb[1:3:2]                     | passed  | 0.02606 seconds |
+./spec/user_spec.rb[1:4:1]                     | passed  | 0.04483 seconds |
