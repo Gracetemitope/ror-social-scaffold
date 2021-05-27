@@ -40,17 +40,12 @@ class FriendshipsController < ApplicationController
 
   def destroy
     @friend_request = Friendship.find_by(id: friendship_update_params[:id])
-    if @friend_request[:status] == 'pending'
-      @friend_request[:status] = 'rejected'
       if @friend_request.save
-        flash[:notice] = 'Friend request updated'
+        flash[:notice] = 'Friendship updated'
         redirect_to users_path
       else
         flash[:alert] = 'Failed to reject friend'
       end
-    else
-      flash[:alert] = 'Something went wrong'
-    end
   end
 
   def friendship_params
