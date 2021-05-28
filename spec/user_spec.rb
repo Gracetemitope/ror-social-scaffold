@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe Friendship, type: :model do
   describe 'complete params' do
     before do
       @user = User.create(name: 'David', email: 'david@email.com', password: 'password', gravatar_url: '')
