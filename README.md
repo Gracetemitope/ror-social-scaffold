@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-TBA
+https://rails-facebook-clone.herokuapp.com/users/sign_in
 
 
 ## Getting Started
@@ -71,8 +71,13 @@ TBA
 
 ## Authors
 
-TBA
+# Author
 
+👤 **Temitope Grace**
+
+- GitHub: [Gracetemitope](https://github.com/gracetemitope)
+- Twitter: [@DevGrachy](https://twitter.com/devgrachy)
+- LinkedIn: [Ajanaku Temitope](https://www.linkedin.com/in/ajanaku-temitope/)
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
@@ -85,9 +90,10 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-TBA
+- Microverse
+- Odin
 
 ## 📝 License
 
-TBA
+This project is [MIT](LICENSE) licensed.
 
